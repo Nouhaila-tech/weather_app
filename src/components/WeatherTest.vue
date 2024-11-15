@@ -262,3 +262,4 @@ export default defineComponent({
   .weather-icon { /* Icon styles */ }
   </style>
   
+

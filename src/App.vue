@@ -1,9 +1,7 @@
 <template>
-  <div id="app" class="app-container">
-    <WeatherTest />
-  </div>
+  
 
-  <div id="app" class="app-container">
+  <div id="app" class="page">
     <WeatherDisplay />
   </div>
   
