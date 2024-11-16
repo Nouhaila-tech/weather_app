@@ -237,14 +237,14 @@ export default defineComponent({
   name: 'WeatherDisplay',
   setup() {
     const city = ref<string>('Casablanca');
-    const temperature = ref<string>('');
+    const temperature = ref<string | number>(''); 
     const description = ref<string>('');
     const feelsLike = ref<number | null>(null);
     const iconUrl = ref<string>('');
     const inputCity = ref<string>('Casablanca'); 
     const isCelsius = ref<boolean>(true);  
     const isMetric = ref<boolean>(true);   
-    const aqi = ref<number | null>(null);
+    const aqi = ref<number | null>(null);       
     const humidity = ref<number | null>(null);
     const windSpeed = ref<number | null>(null);
     const rain = ref<number | null>(null);
@@ -300,22 +300,37 @@ export default defineComponent({
       isCardVisible.value = !isCardVisible.value;
     };
 
+
     // Method to toggle between Celsius and Fahrenheit
     const toggleCelsiusFahrenheit = () => {
-        isCelsius.value = !isCelsius.value;
-        
-        // Convert temperature if needed
-        if (!isCelsius.value) {
-            // Convert to Fahrenheit, rounded to 2 decimal places
-            temperature.value = ((temperature.value * 9/5) + 32).toFixed(2);
-        } else {
-            // Convert to Celsius, rounded to 2 decimal places
-            temperature.value = ((temperature.value - 32) * 5/9).toFixed(2);
-        }
+    let temp: number;
 
-        // Optionally, convert back to a number if you want to perform any further calculations
-        temperature.value = parseFloat(temperature.value);
-    };
+    // Ensure temperature is converted to a number for calculations
+    if (typeof temperature.value === 'string' && temperature.value.trim() !== '') {
+        temp = parseFloat(temperature.value);
+    } else if (typeof temperature.value === 'number') {
+        temp = temperature.value;
+    } else {
+        // Handle cases where temperature is not a valid number (e.g., empty string)
+        console.error('Invalid temperature value. Conversion skipped.');
+        return;
+    }
+
+    // Toggle the unit
+    isCelsius.value = !isCelsius.value;
+
+    // Perform the conversion
+    if (isCelsius.value) {
+        // Convert to Celsius
+        temp = (temp - 32) * 5 / 9;
+    } else {
+        // Convert to Fahrenheit
+        temp = (temp * 9 / 5) + 32;
+    }
+
+    // Update temperature, rounded to 2 decimal places
+    temperature.value = parseFloat(temp.toFixed(2));
+};
 
     const formatTemperature = (temp: number, isCelsius: boolean) => {
         if (isCelsius) {
@@ -374,8 +389,10 @@ export default defineComponent({
     };
 
     const aqiPercentage = (): number => {
-      return (aqi.value / 100) * 300;
-    };
+      const aqiValue = aqi.value ?? 0; 
+      return (aqiValue / 100) * 300;
+   };
+
 
     const isTooltipVisible = ref(false);
 
@@ -452,12 +469,13 @@ const fetchWeather = async () => {
 
 
 
-    if (weatherData.rain && weatherData.rain['1h']) {
-          precipitation.value = (weatherData.rain['1h'] / this.maxPrecipitation) * 100;
-        } else {
-          precipitation.value = 0; 
-        }
+    const defaultMaxPrecipitation = 50; 
 
+  if (weatherData.rain && weatherData.rain['1h']) {
+      precipitation.value = (weatherData.rain['1h'] / defaultMaxPrecipitation) * 100;
+  } else {
+      precipitation.value = 0; 
+  }
     
 
   } catch (error) {
