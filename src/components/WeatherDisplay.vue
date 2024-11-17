@@ -92,7 +92,7 @@
         <div class="weather-icon-container">
             <img :src="iconUrl" alt="weather icon" v-if="iconUrl" />
             <h1>
-                {{ Math.round(temperature) }}°
+              {{ formattedTemperature }}°
             </h1>
         </div>
         <div class="weather-details">
@@ -227,11 +227,10 @@
 </template>  
   
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch, onUnmounted } from 'vue';
+import { defineComponent, ref, onMounted, watch, onUnmounted, computed  } from 'vue';
 import sunnyIcon from '../assets/icons/sunny.svg';
 import cloudyIcon from '../assets/icons/cloudy.svg';
 import rainyIcon from '../assets/icons/rainy.svg';
-import { defineConfig } from 'vite';
 
 export default defineComponent({
   name: 'WeatherDisplay',
@@ -341,6 +340,14 @@ export default defineComponent({
             return Math.round(((temp * 9/5) + 32)).toString();
         }
         };
+
+        const formattedTemperature = computed(() => {
+      // Ensure the temperature is converted to a number first
+      const temp = typeof temperature.value === 'string' ? Number(temperature.value) : temperature.value;
+      // Handle invalid or empty temperatures gracefully
+      if (isNaN(temp)) return '--'; 
+      return formatTemperature(temp, isCelsius.value);
+    });
 
 
 
@@ -471,11 +478,11 @@ const fetchWeather = async () => {
 
     const defaultMaxPrecipitation = 50; 
 
-  if (weatherData.rain && weatherData.rain['1h']) {
-      precipitation.value = (weatherData.rain['1h'] / defaultMaxPrecipitation) * 100;
-  } else {
-      precipitation.value = 0; 
-  }
+if (weatherData.rain && weatherData.rain['1h']) {
+    precipitation.value = (weatherData.rain['1h'] / defaultMaxPrecipitation) * 100;
+} else {
+    precipitation.value = 0; 
+}
     
 
   } catch (error) {
@@ -522,6 +529,7 @@ const fetchWeather = async () => {
       formatTimeFrensh,
       temperature,
       formatTemperature,
+      formattedTemperature,
       forecastType,
       description,
       feelsLike,
