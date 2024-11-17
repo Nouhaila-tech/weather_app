@@ -1,33 +1,57 @@
-# weather_app
+# Weather Display App
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple yet powerful weather display app built with Vue.js that shows current weather, forecasts, and environmental data such as AQI, humidity, wind speed, and precipitation. This app allows users to search for weather by city, toggle between Celsius and Fahrenheit temperatures, and choose between hourly or daily forecasts. It also includes customization options for units of measurement and temperature display.
 
-## Recommended IDE Setup
+## Installation
+To get started with the project, follow these steps:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+### Clone the repository
 
 ```sh
-npm install
+git clone https://github.com/yourusername/weather-app.git
+cd weather-app
 ```
 
-### Compile and Hot-Reload for Development
+### Install dependencies using pnpm
 
 ```sh
-npm run dev
+npm install -g pnpm
 ```
 
-### Type-Check, Compile and Minify for Production
+Then install the project dependencies
 
 ```sh
-npm run build
+pnpm install
 ```
+###  Run the app
+
+```sh
+pnpm run dev
+```
+The app will be available at http://localhost:3000.
+
+
+## Features
+
+- **Search City**: Enter a city name and hit "Enter" or click the button to get the current weather and forecast.
+- **Temperature Toggle**: Switch between Celsius and Fahrenheit for temperature display.
+- **Unit Options**: Choose between metric or imperial units for weather data like wind speed and precipitation.
+- **Hourly & Daily Forecast**: View hourly and 7-day forecasts with weather details.
+- **AQI (Air Quality Index)**: Displays air quality index with a progress bar and tooltip for hazardous levels.
+- **Settings**: Customizable temperature unit and measurement system.
+  
+---
+
+## Technologies Used
+
+- **Vue.js**: Frontend framework used to build the app.
+- **TypeScript**: Type safety and better development experience.
+- **Vercel**: Hosting for the live demo.
+- **OpenWeather API**: Weather data provider.
+
+
+### 🎥 Demo
+Watch the demo video [here](https://www.loom.com/share/759592960d514cd3ac0134eeac49bf93?sid=07e318df-bba6-4136-bfdf-b1f2e0b6f425) for a quick walkthrough of the app.
+
+### 🌐 Live Demo
+The app is live and hosted on [Vercel](https://weather-app-eight-chi-64.vercel.app/).
