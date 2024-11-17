@@ -2,6 +2,12 @@
 
 A simple yet powerful weather display app built with Vue.js that shows current weather, forecasts, and environmental data such as AQI, humidity, wind speed, and precipitation. This app allows users to search for weather by city, toggle between Celsius and Fahrenheit temperatures, and choose between hourly or daily forecasts. It also includes customization options for units of measurement and temperature display.
 
+### 🎥 Demo
+Watch the demo video [here](https://www.loom.com/share/759592960d514cd3ac0134eeac49bf93) for a quick walkthrough of the app.
+
+### 🌐 Live Demo
+The app is live and hosted on [Vercel](https://weather-app-eight-chi-64.vercel.app/).
+
 ## Installation
 To get started with the project, follow these steps:
 
@@ -49,9 +55,3 @@ The app will be available at http://localhost:3000.
 - **Vercel**: Hosting for the live demo.
 - **OpenWeather API**: Weather data provider.
 
-
-### 🎥 Demo
-Watch the demo video [here]([https://www.loom.com/share/759592960d514cd3ac0134eeac49bf93?sid=07e318df-bba6-4136-bfdf-b1f2e0b6f425](https://www.loom.com/share/759592960d514cd3ac0134eeac49bf93?sid=a2f15724-f70c-4370-b712-959b871c9c84)) for a quick walkthrough of the app.
-
-### 🌐 Live Demo
-The app is live and hosted on [Vercel](https://weather-app-eight-chi-64.vercel.app/).
